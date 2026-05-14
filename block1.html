@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №3 - Блок 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .task-block {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .task-block h2 {
+            color: #2980b9;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 4px;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #1a6a9a;
+        }
+
+        input[type="text"], input[type="number"] {
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 4px;
+            width: 200px;
+        }
+        #task1-output {
+            margin-top: 15px;
+            padding: 12px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            min-height: 40px;
+        }
+        #task2-area {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #1a1a2e;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        #moving-img {
+            position: absolute;
+            height: 80px;
+            display: none;
+        }
+
+        #task2-controls {
+            margin-top: 10px;
+        }
+        #task3-content p {
+            font-size: 18px;
+            color: #555;
+            margin: 6px 0;
+        }
+        #clock-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2c3e50;
+            letter-spacing: 4px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 6px;
+        }
+        #task5-fade-block {
+            padding: 20px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 6px;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+
+        #task5-controls {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Лабораторна робота №3 - Блок 1</h1>
+<h3 style="text-align:center; color:#666;">Динамічний HTML. Основи JavaScript</h3>
+
+<div class="task-block">
+    <h2>Завдання 1 - Функція зміни розміру тексту</h2>
+    <p>Введіть текст і вкажіть розмір шрифту, потім натисніть кнопку.</p>
+
+    <input type="text" id="input-text" placeholder="Введіть текст..." value="Привіт, світ!">
+    <input type="number" id="input-size" placeholder="Розмір (px)" value="20" min="8" max="72">
+    <button onclick="showText()">Показати</button>
+
+    <div id="task1-output">Тут з'явиться текст</div>
+</div>
+
+<div class="task-block">
+    <h2>Завдання 2 - Картинка в довільному місці</h2>
+    <p>Кожну секунду картинка з'являється в новому місці.</p>
+
+    <div id="task2-area">
+        
+        <img id="moving-img" src="./image.png" alt="Moving Icon">
+    </div>
+
+    <div id="task2-controls">
+        <button onclick="startMoving()">Запустити</button>
+        <button onclick="stopMoving()">Зупинити</button>
+    </div>
+</div>
+
+<div class="task-block">
+    <h2>Завдання 3 - Зміна розміру всіх &lt;p&gt; на сторінці</h2>
+    <p>Натисніть кнопку - всі параграфи на сторінці стануть 15px.</p>
+    <p>Ще один параграф для прикладу.</p>
+    <p>І ще один - щоб бачити ефект на кількох елементах.</p>
+
+    <div id="task3-content">
+        <p>Це параграф всередині блоку завдання 3.</p>
+        <p>Ще один параграф тут.</p>
+    </div>
+
+    <button onclick="changeParagraphSize()">Змінити розмір всіх &lt;p&gt; на 15px</button>
+    <button onclick="resetParagraphSize()">Скинути</button>
+    <p id="task3-status" style="color: green; font-weight: bold;"></p>
+</div>
+
+<div class="task-block">
+    <h2>Завдання 4 - Текстовий годинник</h2>
+    <p>Годинник відображає поточний час і оновлюється кожну секунду.</p>
+
+    <div id="clock-display">--:--:--</div>
+
+    <div style="margin-top: 10px;">
+        <button onclick="startClock()">Запустити</button>
+        <button onclick="stopClock()">Зупинити</button>
+    </div>
+</div>
+
+<div class="task-block">
+    <h2>Завдання 5 - Ефект поступового витирання</h2>
+    <p>Блок поступово стає прозорим (зникає) або з'являється за допомогою таймера.</p>
+
+    <div id="task5-fade-block">
+        Цей блок буде поступово зникати та з'являтися.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Це демонстрація ефекту зміни прозорості через setInterval.
+    </div>
+
+    <div id="task5-controls" style="margin-top: 10px;">
+        <button onclick="fadeOut()">Витерти (зникнути)</button>
+        <button onclick="fadeIn()">Відновити (з'явитися)</button>
+    </div>
+</div>
+
+
+<script>
+    //1
+    function showTextWithSize(text, fontSize) {
+        var outputDiv = document.getElementById('task1-output');
+        outputDiv.innerHTML = text;
+        outputDiv.style.fontSize = fontSize + 'px';
+    }
+
+   
+    function showText() {
+        var text = document.getElementById('input-text').value;
+        var size = document.getElementById('input-size').value;
+
+        if (text === '' || size === '') {
+            alert('Будь ласка, введіть текст і розмір!');
+            return;
+        }
+        showTextWithSize(text, size);
+    }
+
+
+    //2 
+    var movingTimer = null;
+
+    function startMoving() {
+        var img = document.getElementById('moving-img');
+        var area = document.getElementById('task2-area');
+
+        img.style.display = 'block';
+        if (movingTimer !== null) return;
+
+        movingTimer = setInterval(function() {
+            var areaWidth = area.offsetWidth;
+            var areaHeight = area.offsetHeight;
+
+            var randomLeft = Math.floor(Math.random() * (areaWidth - 60));
+            var randomTop = Math.floor(Math.random() * (areaHeight - 60));
+
+            img.style.left = randomLeft + 'px';
+            img.style.top = randomTop + 'px';
+
+        }, 1000); 
+    }
+
+    function stopMoving() {
+        if (movingTimer !== null) {
+            clearInterval(movingTimer);
+            movingTimer = null;
+        }
+        var img = document.getElementById('moving-img');
+        img.style.display = 'none';
+    }
+
+
+   //3
+    var originalSizes = []; 
+
+    function changeParagraphSize() {
+        var allParagraphs = document.getElementsByTagName('p');
+        originalSizes = []; 
+
+        for (var i = 0; i < allParagraphs.length; i++) {
+            originalSizes.push(allParagraphs[i].style.fontSize);
+            allParagraphs[i].setAttribute('style',
+                allParagraphs[i].getAttribute('style') || '' +
+                'font-size: 15px;'
+            );
+            allParagraphs[i].style.fontSize = '15px';
+        }
+
+        document.getElementById('task3-status').textContent =
+            'Знайдено та змінено ' + allParagraphs.length + ' параграфів!';
+    }
+
+    function resetParagraphSize() {
+        var allParagraphs = document.getElementsByTagName('p');
+        if(allParagraphs.length !== originalSizes.length) {
+           alert('Кількість параграфів змінилася з моменту останньої зміни розміру. Скидання може бути некоректним.');
+            return;
+        }
+        for (var i = 0; i < allParagraphs.length; i++) {
+            allParagraphs[i].style.fontSize = originalSizes[i] || '';
+        }
+        document.getElementById('task3-status').textContent = 'Розміри скинуто.';
+    }
+
+
+    //4
+    var clockTimer = null;
+
+    function updateClock() {
+        var now = new Date();
+
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+
+        if (hours < 10) hours = '0' + hours;
+        if (minutes < 10) minutes = '0' + minutes;
+        if (seconds < 10) seconds = '0' + seconds;
+
+        document.getElementById('clock-display').textContent =
+            hours + ':' + minutes + ':' + seconds;
+    }
+
+    function startClock() {
+        if (clockTimer !== null) return; 
+        updateClock();
+        clockTimer = window.setInterval(updateClock, 1000);
+    }
+
+    function stopClock() {
+        if (clockTimer !== null) {
+            window.clearInterval(clockTimer);
+            clockTimer = null;
+        }
+    }
+    startClock();
+
+
+   //5
+    var fadeTimer = null;
+    var currentOpacity = 1.0;
+
+    function fadeOut() {
+        if (fadeTimer !== null) {
+            clearInterval(fadeTimer);
+            fadeTimer = null;
+        }
+
+        var block = document.getElementById('task5-fade-block');
+        currentOpacity = parseFloat(block.style.opacity) || 1.0;
+
+        fadeTimer = setInterval(function() {
+            if (currentOpacity <= 0) {
+                currentOpacity = 0;
+                clearInterval(fadeTimer);
+                fadeTimer = null;
+                return;
+            }
+            currentOpacity -= 0.05; 
+            block.style.opacity = currentOpacity;
+        }, 50);
+    }
+
+    function fadeIn() {
+        if (fadeTimer !== null) {
+            clearInterval(fadeTimer);
+            fadeTimer = null;
+        }
+
+        var block = document.getElementById('task5-fade-block');
+        currentOpacity = parseFloat(block.style.opacity) || 0;
+
+        fadeTimer = setInterval(function() {
+            if (currentOpacity >= 1) {
+                currentOpacity = 1;
+                clearInterval(fadeTimer);
+                fadeTimer = null;
+                return;
+            }
+            currentOpacity += 0.05;
+            block.style.opacity = currentOpacity;
+        }, 50);
+    }
+
+</script>
+
+</body>
+</html>

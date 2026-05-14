@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №3</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        h3 {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .task-block {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .task-block h2 {
+            color: #8e44ad;
+            margin-top: 0;
+        }
+
+        button {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #6c3483;
+        }
+
+        #browser-info {
+            margin-top: 15px;
+            background: #f3ecf9;
+            padding: 15px;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+
+        #protected-text {
+            margin-top: 15px;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 18px;
+            line-height: 1.6;
+
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Лабораторна робота №3</h1>
+    <h3>Вибрані завдання: 5, 6</h3>
+
+
+    <div class="task-block">
+        <h2>Завдання 5 - Інформація про браузер</h2>
+
+        <p>
+            Натисніть кнопку, щоб дізнатись:
+        </p>
+
+        <ul>
+            <li>звідки користувач перейшов на сторінку;</li>
+            <li>який браузер використовується.</li>
+        </ul>
+
+        <button onclick="showBrowserInfo()">
+            Показати інформацію
+        </button>
+
+        <div id="browser-info"></div>
+    </div>
+
+
+
+    <div class="task-block">
+        <h2>
+            Завдання 6 - Заборона виділення та копіювання тексту
+        </h2>
+        <p>
+            Текст нижче не можна виділити або скопіювати.
+        </p>
+
+        <div id="protected-text">
+            Це спеціальний текст, для якого заборонено
+            виділення та копіювання через JavaScript.
+        </div>
+    </div>
+
+
+    <script>
+
+        function showBrowserInfo() {
+
+            var referrer = document.referrer;
+            var browserInfo = navigator.userAgent;
+
+            if (referrer === '') {
+                referrer = 'Користувач відкрив сторінку напряму';
+            }
+
+            document.getElementById('browser-info').innerHTML =
+                '<p><strong>Звідки прийшли:</strong> '
+                + referrer + '</p>' +
+
+                '<p><strong>Інформація про браузер:</strong><br>'
+                + browserInfo + '</p>';
+        }
+
+
+        var protectedText =
+            document.getElementById('protected-text');
+        protectedText.addEventListener('copy', function(event) {
+            event.preventDefault();
+            alert('Копіювання заборонено!');
+        });
+
+
+        protectedText.addEventListener('contextmenu', function(event) {
+
+            event.preventDefault();
+        });
+
+    </script>
+
+</body>
+</html>

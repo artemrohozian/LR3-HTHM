@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №3 - Блок 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .task-block {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .task-block h2 {
+            color: #27ae60;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 4px;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #1e8449;
+        }
+        #task3-wrapper {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            margin-top: 15px;
+        }
+
+        #color-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #color-list li {
+            padding: 8px 16px;
+            margin: 4px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            border: 2px solid #ddd;
+            font-weight: bold;
+            transition: border-color 0.2s;
+            user-select: none;
+        }
+
+        #color-list li:hover {
+            border-color: #999;
+        }
+
+        #color-list li.active {
+            border-color: #2c3e50;
+        }
+
+        #color-square {
+            width: 150px;
+            height: 150px;
+            background-color: black;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+        }
+        #task4-tracker {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            margin-top: 10px;
+            min-height: 100px;
+        }
+
+        #task4-tracker span {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        #task6-output {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-top: 15px;
+            min-height: 50px;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        #task6-phrase-input {
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            width: 300px;
+            margin: 4px;
+        }
+
+        #task8-controls {
+            margin-bottom: 15px;
+        }
+
+        #task8-controls select {
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            margin: 4px;
+        }
+
+        #calendar-table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        #calendar-table th {
+            background-color: #27ae60;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        #calendar-table td {
+            padding: 8px 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+            width: 14.28%;
+        }
+
+        #calendar-table td:hover {
+            background-color: #eafaf1;
+            cursor: default;
+        }
+
+        #calendar-table td.today {
+            background-color: #27ae60;
+            color: white;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        #calendar-table td.empty {
+            background-color: #f9f9f9;
+        }
+
+        #calendar-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Лабораторна робота №3 - Блок 2</h1>
+<h3 style="text-align:center; color:#666;">Вибрані завдання: 3, 4, 6, 8</h3>
+
+
+
+<div class="task-block">
+    <h2>Завдання 3 - Список кольорів та квадрат</h2>
+    <p>
+        Зліва - список з 5 кольорів. Справа - квадрат.
+        Натисніть на колір, щоб змінити колір квадрата.
+    </p>
+
+    <div id="task3-wrapper">
+        <ul id="color-list">
+            <li style="color: #e74c3c;" onclick="changeSquareColor('#e74c3c', this)">Червоний</li>
+            <li style="color: #3498db;" onclick="changeSquareColor('#3498db', this)">Синій</li>
+            <li style="color: #2ecc71;" onclick="changeSquareColor('#2ecc71', this)">Зелений</li>
+            <li style="color: #f39c12;" onclick="changeSquareColor('#f39c12', this)">Жовтий</li>
+            <li style="color: #9b59b6;" onclick="changeSquareColor('#9b59b6', this)">Фіолетовий</li>
+        </ul>
+
+        <div id="color-square"></div>
+    </div>
+</div>
+
+
+<div class="task-block">
+    <h2>Завдання 4 - Координати курсору та код клавіші</h2>
+    <p>Рухайте мишкою або натискайте клавіші - інформація з'явиться нижче.</p>
+
+    <div id="task4-tracker">
+        <div>Координати миші: X = <span id="mouse-x">0</span>, Y = <span id="mouse-y">0</span></div>
+        <div style="margin-top: 10px;">Натиснута клавіша: <span id="key-char">-</span></div>
+        <div>Код клавіші (keyCode): <span id="key-code">-</span></div>
+    </div>
+</div>
+
+
+<div class="task-block">
+    <h2>Завдання 6 - Розфарбування букв фрази</h2>
+    <p>
+        Введіть фразу і натисніть кнопку.
+        Кожна буква отримає колір з заданого набору по колу.
+    </p>
+
+    <input
+        type="text"
+        id="task6-phrase-input"
+        placeholder="Введіть фразу..."
+        value="Привіт JavaScript!"
+    >
+    <button onclick="colorizePhrase()">Розфарбувати</button>
+    <button onclick="clearPhrase()">Очистити</button>
+
+    <div id="task6-output"></div>
+</div>
+
+
+<div class="task-block">
+    <h2>Завдання 8 - Календар на JavaScript</h2>
+    <p>Виберіть місяць і рік, щоб побудувати календар.</p>
+
+    <div id="task8-controls">
+        <select id="sel-month">
+            <option value="0">Січень</option>
+            <option value="1">Лютий</option>
+            <option value="2">Березень</option>
+            <option value="3">Квітень</option>
+            <option value="4">Травень</option>
+            <option value="5">Червень</option>
+            <option value="6">Липень</option>
+            <option value="7">Серпень</option>
+            <option value="8">Вересень</option>
+            <option value="9">Жовтень</option>
+            <option value="10">Листопад</option>
+            <option value="11">Грудень</option>
+        </select>
+
+        <select id="sel-year"></select>
+
+        <button onclick="buildCalendar()">Показати</button>
+    </div>
+
+    <div id="calendar-title"></div>
+    <table id="calendar-table"></table>
+</div>
+
+
+<script>
+
+    //3
+    function changeSquareColor(color, clickedItem) {
+        var square = document.getElementById('color-square');
+        square.style.backgroundColor = color;
+        var items = document.querySelectorAll('#color-list li');
+        for (var i = 0; i < items.length; i++) {
+            items[i].classList.remove('active');
+        }
+        clickedItem.classList.add('active');
+    }
+
+
+    //4
+    document.addEventListener('mousemove', function(event) {
+        document.getElementById('mouse-x').textContent = event.clientX;
+        document.getElementById('mouse-y').textContent = event.clientY;
+    });
+
+    document.addEventListener('keydown', function(event) {
+        var keyChar = event.key;
+        var keyCode = event.keyCode || event.which;
+
+        document.getElementById('key-char').textContent = keyChar;
+        document.getElementById('key-code').textContent = keyCode;
+    });
+
+
+    //6
+    var colorPalette = [
+        '#e74c3c', 
+        '#e67e22', 
+        '#f1c40f', 
+        '#2ecc71', 
+        '#3498db', 
+        '#9b59b6', 
+        '#1abc9c'  
+    ];
+
+    function colorizePhrase() {
+        var phrase = document.getElementById('task6-phrase-input').value;
+        var outputDiv = document.getElementById('task6-output');
+
+        if (phrase === '') {
+            alert('Введіть фразу!');
+            return;
+        }
+
+        var result = '';
+        var colorIndex = 0;
+        for (var i = 0; i < phrase.length; i++) {
+            var char = phrase[i];
+
+            if (char === ' ') {
+                result += '<span>&nbsp;</span>';
+            } else {
+                var color = colorPalette[colorIndex % colorPalette.length];
+                result += '<span style="color:' + color + '">' + char + '</span>';
+                colorIndex++;
+            }
+        }
+
+        outputDiv.innerHTML = result;
+    }
+
+    function clearPhrase() {
+        document.getElementById('task6-output').innerHTML = '';
+        document.getElementById('task6-phrase-input').value = '';
+    }
+
+
+
+    //8
+    var monthNames = [
+        'Січень', 'Лютий', 'Березень', 'Квітень',
+        'Травень', 'Червень', 'Липень', 'Серпень',
+        'Вересень', 'Жовтень', 'Листопад', 'Грудень'
+    ];
+
+    var dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'];
+
+    var yearSelect = document.getElementById('sel-year');
+    var currentYear = new Date().getFullYear();
+    for (var y = currentYear - 3; y <= currentYear + 3; y++) {
+        var opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        if (y === currentYear) opt.selected = true;
+        yearSelect.appendChild(opt);
+    }
+
+    document.getElementById('sel-month').value = new Date().getMonth();
+
+    function buildCalendar() {
+        var month = parseInt(document.getElementById('sel-month').value);
+        var year = parseInt(document.getElementById('sel-year').value);
+
+        var today = new Date();
+        var isCurrentMonth = (today.getMonth() === month && today.getFullYear() === year);
+        document.getElementById('calendar-title').textContent =
+            monthNames[month] + ' ' + year;
+
+        var firstDay = new Date(year, month, 1);
+        var startDayOfWeek = (firstDay.getDay() + 6) % 7;
+
+        var daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        var table = document.getElementById('calendar-table');
+        table.innerHTML = ''; 
+
+        var headerRow = document.createElement('tr');
+        for (var d = 0; d < 7; d++) {
+            var th = document.createElement('th');
+            th.textContent = dayNames[d];
+            headerRow.appendChild(th);
+        }
+        table.appendChild(headerRow);
+
+        var dayCounter = 1;
+        var row = document.createElement('tr');
+
+        for (var empty = 0; empty < startDayOfWeek; empty++) {
+            var emptyTd = document.createElement('td');
+            emptyTd.classList.add('empty');
+            row.appendChild(emptyTd);
+        }
+
+        var cellIndex = startDayOfWeek;
+
+        while (dayCounter <= daysInMonth) {
+            var td = document.createElement('td');
+            td.textContent = dayCounter;
+            if (isCurrentMonth && dayCounter === today.getDate()) {
+                td.classList.add('today');
+                td.title = 'Сьогодні';
+            }
+
+            row.appendChild(td);
+            cellIndex++;
+            if (cellIndex % 7 === 0) {
+                table.appendChild(row);
+                row = document.createElement('tr');
+            }
+
+            dayCounter++;
+        }
+
+        if (cellIndex % 7 !== 0) {
+            while (cellIndex % 7 !== 0) {
+                var lastEmpty = document.createElement('td');
+                lastEmpty.classList.add('empty');
+                row.appendChild(lastEmpty);
+                cellIndex++;
+            }
+            table.appendChild(row);
+        }
+    }
+
+    buildCalendar();
+
+</script>
+
+</body>
+</html>
